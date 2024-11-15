@@ -16,7 +16,7 @@ CREATE TABLE Registro_Cliente  (
     Nombre VARCHAR(20) NOT NULL,
     Apellido VARCHAR(20) NOT NULL,
     Telefono VARCHAR(10) NOT NULL,
-    Mail VARCHAR(20) NOT NULL,
+    Mail VARCHAR(50) NOT NULL,
     PRIMARY KEY(id_cliente)
 );
 
