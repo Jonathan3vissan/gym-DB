@@ -2,16 +2,16 @@ import { TABLA_REGISTRO_CLIENTE, AGREGAR_CLIENTE, ELIMINAR_CLIENTE_TABLA_CLIENTE
 import { createConnection } from "mysql2/promise";
 
 /**
- * crea la conexion con la base de datos
- * @returns la conexion con la base de datos
+ * Crea la conexión con la base de datos
+ * @returns la conexión con la base de datos
  */
 async function crearConexionDB() {
     try {
         const conexionDB = await createConnection({
             host: "localhost",
             user: "root",
-            database: "gimnasio",
-            password: "kukito"
+            database: "gimnasio", // Cambia esto por el nombre correcto de tu base de datos
+            password: "kukito" // Cambia esto por tu contraseña
         });
         console.log("Conexión exitosa a la base de datos.");
         return conexionDB;
@@ -19,9 +19,10 @@ async function crearConexionDB() {
         console.error("Error al conectar a la base de datos:", error);
     }
 }
+
 /**
- * cierra la conexion con la base de datos
- * @param {Object} conexionDB del usuario
+ * Cierra la conexión con la base de datos
+ * @param {Object} conexionDB - conexión de la base de datos
  */
 async function cerraConexionDb(conexionDB) {
     try {
@@ -33,9 +34,9 @@ async function cerraConexionDb(conexionDB) {
 }
 
 /**
- * realiza la consulta de mostrar la tabla de cliente registrados
- * @param {Object} conexionDB del usuario 
- * @returns el registro de clientes
+ * Realiza la consulta de mostrar la tabla de clientes registrados
+ * @param {Object} conexionDB - conexión con la base de datos
+ * @returns los registros de clientes
  */
 async function mostrarRegistroClienteDB(conexionDB) {
     try {
@@ -45,19 +46,19 @@ async function mostrarRegistroClienteDB(conexionDB) {
         console.error("Error al ejecutar la consulta de registroClienteDB:", error);
     }
 }
+
 /**
- * agrega un cliente a la tabla registro_cliente
- * @param {Object} conexionDB del usuario
- * @param {String} nombre del nuevo cliente
- * @param {String} apellido del nuevo cliente
- * @param {Number} dni del nuevo cliente
- * @param {String} mail del nuevo cliente
+ * Agrega un cliente a la tabla de registro_cliente
+ * @param {Object} conexionDB  conexión con la base de datos
+ * @param {String} nombre  del nuevo cliente
+ * @param {String} apellido  del nuevo cliente
+ * @param {Number} dni  del nuevo cliente
+ * @param {String} mail  del nuevo cliente
  * @param {Number} telefono del nuevo cliente
  */
 async function agregaRegistroCliente(conexionDB, nombre, apellido, dni, mail, telefono) {
     try {
-        await conexionDB.query(AGREGAR_CLIENTE, [nombre, apellido, dni, mail, telefono
-        ]);
+        await conexionDB.query(AGREGAR_CLIENTE, [nombre, apellido, dni, mail, telefono]);
         console.log("Cliente agregado correctamente.");
     } catch (error) {
         console.error("Error al agregar cliente:", error);
@@ -65,26 +66,24 @@ async function agregaRegistroCliente(conexionDB, nombre, apellido, dni, mail, te
 }
 
 /**
- * elimana un cliente de la base de datos por el dni
- * @param {Object} conexionDB del usuario 
- * @param {*} dni del usuario a eliminar
+ * Elimina un cliente de la base de datos por el dni
+ * @param {Object} conexionDB - conexión con la base de datos
+ * @param {Number} dni - dni del usuario a eliminar
  */
-async function elimanarCliente(conexionDB, dni) {
+async function eliminarCliente(conexionDB, dni) {
     try {
-        await conexionDB.query(TABLA_REGISTRO_CLIENTE)
-        await conexionDB.query(ELIMINAR_CLIENTE_TABLA_CLIENTE[dni])
+        await conexionDB.query(ELIMINAR_CLIENTE_TABLA_CLIENTE, [dni]);
+        console.log("Cliente eliminado correctamente.");
     } catch (error) {
-        console.error("error al eliminar cliente", error)
+        console.error("Error al eliminar cliente:", error);
     }
-
 }
 
-export default BaseDeDatos = {
-    conectarDB: crearConexionDB(),
-    cerrarConexion: cerraConexionDb(conexionDB),
-    mostrarCliente: mostrarRegistroClienteDB(conexionDB),
-    agregarCliente: agregaRegistroCliente(conexionDB, nombre, apellido, telefono, mail),
-    eliminarCliente: elimanarCliente(conexionDB, dni)
-
-
+// Exporta las funciones para su uso en otros módulos
+export default {
+    crearConexionDB,
+    cerraConexionDb,
+    mostrarRegistroClienteDB,
+    agregaRegistroCliente,
+    eliminarCliente
 };
