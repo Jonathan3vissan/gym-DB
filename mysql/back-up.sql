@@ -8,14 +8,16 @@ SET time_zone='America/Argentina/Buenos_Aires';
 DROP DATABASE IF EXISTS gimnasio;
 create DATABASE gimnasio;
 use gimnasio;
-CREATE TABLE Registro_Cliente  (
+CREATE TABLE Registro_Cliente (
+    id INT AUTO_INCREMENT,               
     Nombre VARCHAR(20) NOT NULL,
     Apellido VARCHAR(20) NOT NULL,
-    DNI INT( 20) UNIQUE NOT NULL,
-    Telefono INT (10) NOT NULL,
+    DNI INT(20) UNIQUE NOT NULL,          
+    Telefono INT(10) NOT NULL,
     Mail VARCHAR(50) NOT NULL,
-    PRIMARY KEY(DNI)
+    PRIMARY KEY(id)                       
 );
+
 show TABLEs;
 INSERT INTO Registro_Cliente (Nombre, Apellido, DNI, Telefono, Mail) VALUES
 ('Lionel', 'Messi', 1234567890, 1123456789, 'lionel.messi@futbol.com'),
