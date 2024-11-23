@@ -48,4 +48,12 @@ CREATE TABLE Membresia (
     fecha_vencimiento DATETIME AS (DATE_ADD(fecha_inicio, INTERVAL 30 DAY)),  
     PRIMARY KEY(id_membresia)
 );
+
+CREATE table administrador (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  usuario VARCHAR(12) NOT NULL,
+  contrasena VARCHAR(12) NOT NULL,
+  mail VARCHAR(255) NOT NULL
+);
+
 show TABLEs;
