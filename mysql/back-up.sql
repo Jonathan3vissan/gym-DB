@@ -57,3 +57,12 @@ CREATE table administrador (
 );
 
 show TABLEs;
+
+
+INSERT INTO administrador (usuario, contrasena, mail) VALUES
+('jo', '123456', 'johndoe@example.com'),
+('ja', '654321', 'janedoe@example.com'),
+('su', 'admin2024', 'superadmin@example.com');
+
+
+select * from administrador;
