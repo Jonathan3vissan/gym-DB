@@ -52,17 +52,36 @@ CREATE TABLE Membresia (
 CREATE table administrador (
   id INT AUTO_INCREMENT PRIMARY KEY,
   usuario VARCHAR(12) NOT NULL,
-  contrasena VARCHAR(12) NOT NULL,
-  mail VARCHAR(255) NOT NULL
+  contrasena VARCHAR(60) NOT NULL,  
+  mail VARCHAR(30) NOT NULL
 );
 
 show TABLEs;
 
 
 INSERT INTO administrador (usuario, contrasena, mail) VALUES
-('jo', '123456', 'johndoe@example.com'),
-('ja', '654321', 'janedoe@example.com'),
-('su', 'admin2024', 'superadmin@example.com');
+('jona', '$2a$10$ROPm4xam8437llhsQnbgWeGRl9v3xubClSn1BELWKIHvu8p1F0t0W', 'johndoe@example.com');
 
 
 select * from administrador;
+
+ALTER TABLE Registro_Cliente
+ADD COLUMN id_membresia INT,
+ADD CONSTRAINT fk_membresia FOREIGN KEY (id_membresia) REFERENCES Membresia(id_membresia);
+
+
+SELECT 
+    r.id,
+    r.Nombre,
+    r.Apellido,
+    r.DNI,
+    r.Telefono,
+    r.Mail,
+    m.id_membresia,
+    m.Estado,
+    m.fecha_inicio,
+    m.fecha_vencimiento
+FROM 
+    Registro_Cliente r
+LEFT JOIN 
+    Membresia m ON r.id_membresia = m.id_membresia;
